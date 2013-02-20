@@ -1,0 +1,29 @@
+/*Default Toolbar Style*/
+ul.toolbar {
+    list-style-type:none;
+    display: inline-block;
+    background-color: lightgrey;
+    border-radius: 16px;
+    border: 2px outset grey;
+    height: 30px;
+    overflow: hidden;
+    padding-left: 15px;
+}
+ul.toolbar li {
+    border: 0 1px 0 1px solid white;
+    width:32px;
+    padding-left: 3px;
+}
+ul.toolbar li.first {
+    border-left: 2px solid darkgrey;
+}
+ul.toolbar li.last {
+    border-right: 2px solid darkgrey;
+}
+/*Primary Toolbar Style*/
+#editorToolbar {
+    width: 800px;
+    position: absolute;
+    top: 50px;
+    left: 100px;
+}

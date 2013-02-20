@@ -1,0 +1,12 @@
+/art/*
+/sandbox/*
+/docs/*
+*.thumbnails
+.DS_Store
+.DS_Store?
+._*
+Icon?
+ehthumbs.db
+Thumbs.db
+.Spotlight-V100
+.Trashes

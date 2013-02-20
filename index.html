@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>Editor</title>
+    <!-- Start area for script sources -->
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/underscore.js"></script>
+    <script type="text/javascript" src="scripts/backbone.js"></script>
+    <script type="text/javascript" src="scripts/handlebars.js"></script>
+    <script type="text/javascript" src="scripts/helpers/utils.js"></script>
+    <script type="text/javascript" src="scripts/models/editor.js"></script>
+    <script type="text/javascript" src="scripts/models/tool.js"></script>
+    <script type="text/javascript" src="scripts/views/editor.js"></script>
+    <script type="text/javascript" src="scripts/views/tool.js"></script>
+    <script type="text/javascript" src="scripts/views/toolbar.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
+
+    <!-- Start area for style sources -->
+    <link rel="stylesheet" type="text/css" href="styles/editor.css">
+</head>
+<body>
+<script id="toolbarTemplate" type="text/x-handlebars-template">
+    <li class="tool {{className}}">
+        <img src="img/{{iconImg}}" class="toolIcon {{className}}" />
+    </li>
+</script>
+<script id="editorTemplate" type="text/x-handlebars-template">
+    <canvas id="{{id}}" class="{{className}}" width="{{width}}" height="{{height}}">
+    </canvas>
+</script>
+<div id="appSpace"></div>
+</body>
+</html>
