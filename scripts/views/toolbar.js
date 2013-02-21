@@ -8,6 +8,11 @@
 var Toolbar = Backbone.View.extend({
     className: "toolbar",
     id: "editorToolbar",
+    //TODO: Update this to a function that selects a "default"
+    currentTool: null,
+    events: {
+        "click .tool": "onToolSelect"
+    },
     initialize: function() {
         this.collection.on("add", this.onToolAdd, this);
     },
@@ -33,6 +38,9 @@ var Toolbar = Backbone.View.extend({
                 });
             });
         }
+    },
+    onToolSelect: function(event) {
+        alert(event.target.className);
     },
     render: function() {
         var html = "<ul id='editorToolbar' class='toolbar'>"

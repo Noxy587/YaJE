@@ -17,10 +17,9 @@ var App = Backbone.Router.extend({
             var toolsJSString = '[{"iconImg": "pencilIcon.png", "className": "pencilTool"}]';
             var toolsJSON = JSON.parse(toolsJSString);
             if (typeof(toolsJSON) == "object") {
+                var self = this;
                 toolsJSON.forEach(function(item) {
-                    var newTool = new Tool(item);
-                    this.toolbar.collection.add(newTool);
-                    newTool.on("click", this.editorView.onToolSelect, this.editorView);
+                    self.toolbar.collection.add(new Tool(item));
                 });
             }
         }
