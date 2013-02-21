@@ -12,7 +12,7 @@ var App = Backbone.Router.extend({
     editor: function() {
         this.editorView = new EditorView({model: new EditorModel()});
         this.editorView.model.set('context', $("#"+this.editorView.model.get('id')));
-        this.toolbar = new Toolbar({collection: new ToolSet()});
+        this.toolbar = new Toolbar({collection: new Toolbar()});
         if (this.toolbar.collection != undefined && this.toolbar.collection) {
             this.toolbar.collection.add({iconImg: "pencilIcon.png", className: "pencilTool"});
         }

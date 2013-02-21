@@ -7,6 +7,3 @@
  */
 Tool = Backbone.Model.extend({
 });
-ToolSet = Backbone.Collection.extend({
-    model: Tool
-});
