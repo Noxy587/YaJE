@@ -8,10 +8,11 @@
 var Toolbar = Backbone.View.extend({
     className: "toolbar",
     id: "editorToolbar",
+    tagName: "ul",
     //TODO: Update this to a function that selects a "default"
     currentTool: null,
     events: {
-        "click .tool": "onToolSelect"
+        "click li.tool": "onToolSelect"
     },
     initialize: function() {
         this.collection.on("add", this.onToolAdd, this);
@@ -40,15 +41,19 @@ var Toolbar = Backbone.View.extend({
         }
     },
     onToolSelect: function(event) {
-        alert(event.target.className);
+        var selected = $("#"+this.id).find(".selected");
+        if (selected.length > 0) {
+            selected.removeClass('selected');
+        }
+        var listEle = $(event.target).parent('li');
+        listEle.addClass('selected');
     },
     render: function() {
-        var html = "<ul id='editorToolbar' class='toolbar'>"
+        var html = "";
         this.collection.forEach(function(tool) {
             var toolView = new ToolView({model: tool});
             html += toolView.render().$el.html();
         });
-        html += "</ul>";
         this.$el.html(html);
         return this;
     }

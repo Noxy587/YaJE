@@ -20,6 +20,9 @@ ul.toolbar li.first {
 ul.toolbar li.last {
     border-right: 2px solid darkgrey;
 }
+ul.toolbar li.selected {
+    background-color: #999;
+}
 /*Primary Toolbar Style*/
 #editorToolbar {
     width: 800px;
