@@ -12,9 +12,17 @@ var App = Backbone.Router.extend({
     editor: function() {
         this.editorView = new EditorView({model: new EditorModel()});
         this.editorView.model.set('context', $("#"+this.editorView.model.get('id')));
-        this.toolbar = new Toolbar({collection: new Toolbar()});
+        this.toolbar = new Toolbar({collection: new Toolset()});
         if (this.toolbar.collection != undefined && this.toolbar.collection) {
-            this.toolbar.collection.add({iconImg: "pencilIcon.png", className: "pencilTool"});
+            var toolsJSString = '[{"iconImg": "pencilIcon.png", "className": "pencilTool"}]';
+            var toolsJSON = JSON.parse(toolsJSString);
+            if (typeof(toolsJSON) == "object") {
+                toolsJSON.forEach(function(item) {
+                    var newTool = new Tool(item);
+                    this.toolbar.collection.add(newTool);
+                    newTool.on("click", this.editorView.onToolSelect, this.editorView);
+                });
+            }
         }
         $("#appSpace").append(this.toolbar.render().$el);
         $("#appSpace").append(this.editorView.render().$el);

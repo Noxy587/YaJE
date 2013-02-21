@@ -5,6 +5,6 @@
  * Time: 9:15 PM
  * To change this template use File | Settings | File Templates.
  */
-var Toolbar = Backbone.Collection.extend({
+var Toolset = Backbone.Collection.extend({
     model: Tool
 });
