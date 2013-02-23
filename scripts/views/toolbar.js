@@ -12,7 +12,7 @@ var Toolbar = Backbone.View.extend({
     //TODO: Update this to a function that selects a "default"
     currentTool: null,
     events: {
-        "click li.tool": "onToolSelect"
+        "click li.tool": "selectTool"
     },
     initialize: function() {
         this.collection.on("add", this.onToolAdd, this);
@@ -40,13 +40,13 @@ var Toolbar = Backbone.View.extend({
             });
         }
     },
-    onToolSelect: function(event) {
+    selectTool: function(event) {
         var selected = $("#"+this.id).find(".selected");
         if (selected.length > 0) {
             selected.removeClass('selected');
         }
-        var listEle = $(event.target).parent('li');
-        listEle.addClass('selected');
+        $(event.target).parent('li').addClass('selected');
+        this.currentTool = this.collection.findToolWithElement(event.target);
     },
     render: function() {
         var html = "";

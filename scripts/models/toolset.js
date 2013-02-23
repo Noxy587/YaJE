@@ -6,5 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 var Toolset = Backbone.Collection.extend({
-    model: Tool
+    model: Tool,
+    findToolWithElement: function(element) {
+        var queryClass = $(element).clone().removeClass('toolIcon')[0].className;
+        return this.where({'className': queryClass});
+    }
 });
