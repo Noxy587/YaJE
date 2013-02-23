@@ -6,11 +6,14 @@
  * To change this template use File | Settings | File Templates.
  */
 var EditorView = Backbone.View.extend({
-    initialize: function() {
-        this.template = Handlebars.compile($("#editorTemplate").html());
-    },
+    tagName: "canvas",
+    className: "drawingCanvas",
+    id: "editorDrawingCanvas",
+    width: 1024,
+    height: 1024,
     render: function() {
-        this.$el.html(this.template(this.model));
+        this.$el.attr("width", this.width);
+        this.$el.attr("height", this.height);
         return this;
     }
 });

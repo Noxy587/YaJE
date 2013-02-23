@@ -14,7 +14,7 @@ var App = Backbone.Router.extend({
         this.editorView.model.set('context', $("#"+this.editorView.model.get('id')));
         this.toolbar = new Toolbar({collection: new Toolset()});
         if (this.toolbar.collection != undefined && this.toolbar.collection) {
-            var toolsJSString = '[{"iconImg": "pencilIcon.png", "className": "pencilTool"}]';
+            var toolsJSString = '[{"iconImg": "pencilIcon.png", "cursorImg": "pencilCursor.png", "className": "pencilTool"}]';
             var toolsJSON = JSON.parse(toolsJSString);
             if (typeof(toolsJSON) == "object") {
                 var self = this;
@@ -23,8 +23,14 @@ var App = Backbone.Router.extend({
                 });
             }
         }
+        this.toolbar.on('toolSelected', this.toolSelected, this);
         $("#appSpace").append(this.toolbar.render().$el);
         $("#appSpace").append(this.editorView.render().$el);
+    },
+    toolSelected: function(event) {
+        this.editorView.model.set('currentTool', this.toolbar.currentTool);
+        var cursorFile = "img/"+this.toolbar.currentTool.get("cursorImg");
+        this.editorView.el.style.cursor = "url("+cursorFile+"),default";
     }
 });
 

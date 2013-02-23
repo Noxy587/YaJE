@@ -7,10 +7,4 @@
  */
 
 var EditorModel = Backbone.Model.extend({
-    initialize: function() {
-        this.className = "drawingCanvas";
-        this.id = "editorDrawingCanvas";
-        this.width = 1024;
-        this.height = 1024;
-    }
 });

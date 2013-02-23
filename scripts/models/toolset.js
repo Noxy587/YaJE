@@ -9,6 +9,7 @@ var Toolset = Backbone.Collection.extend({
     model: Tool,
     findToolWithElement: function(element) {
         var queryClass = $(element).clone().removeClass('toolIcon')[0].className;
-        return this.where({'className': queryClass});
+        var result = this.where({'className': queryClass});
+        return (result.length > 0 ? result[0] : null);
     }
 });

@@ -47,6 +47,7 @@ var Toolbar = Backbone.View.extend({
         }
         $(event.target).parent('li').addClass('selected');
         this.currentTool = this.collection.findToolWithElement(event.target);
+        this.trigger('toolSelected');
     },
     render: function() {
         var html = "";
