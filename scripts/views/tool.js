@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 var ToolView = Backbone.View.extend({
+    tagName: 'li',
+    className: 'tool',
     initialize: function() {
         this.template = Handlebars.compile($("#toolbarTemplate").html());
     },

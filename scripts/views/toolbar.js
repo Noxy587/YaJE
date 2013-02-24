@@ -14,21 +14,6 @@ var Toolbar = Backbone.View.extend({
     events: {
         "click li.tool": "selectTool"
     },
-    initialize: function() {
-        this.collection.on("add", this.onToolAdd, this);
-    },
-    onToolAdd: function(tool) {
-        var toolClassName = tool.get('className');
-        //If first tool
-        if (this.collection.length == 1) {
-            toolClassName += " first last";
-        } else {
-            toolClassName += " last";
-            var prevTool = this.collection.at(this.collection.length-2);
-            prevTool.set('className', prevTool.get('className').replace(/\s?last\s?/, ''));
-        }
-        tool.set('className', toolClassName);
-    },
     loadToolbar: function(jsonSrc) {
         this.collection.reset();
         if (jsonSrc !== undefined && jsonSrc != null) {
@@ -50,12 +35,18 @@ var Toolbar = Backbone.View.extend({
         this.trigger('toolSelected');
     },
     render: function() {
-        var html = "";
+        var idx = 0;
         this.collection.forEach(function(tool) {
             var toolView = new ToolView({model: tool});
-            html += toolView.render().$el.html();
-        });
-        this.$el.html(html);
+            var toolEle = toolView.render().$el;
+            if (idx == 0) {
+                toolEle.addClass('first');
+            }
+            if (idx >= this.collection.length -1) {
+                toolEle.addClass('last');
+            }
+            this.$el.append(toolEle);
+        }, this);
         return this;
     }
 });
