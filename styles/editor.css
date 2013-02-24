@@ -15,12 +15,12 @@ ul.toolbar {
     border-radius: 16px;
     border: 2px outset grey;
     height: 32px;
-    overflow: hidden;
     padding-left: 15px;
 }
 ul.toolbar li {
     border: 0 1px 0 1px solid white;
     width:32px;
+    height:32px;
     padding-left: 3px;
 }
 ul.toolbar li.first {
@@ -38,4 +38,17 @@ ul.toolbar li.selected {
     position: absolute;
     top: 50px;
     left: 100px;
+}
+ul.toolbarMenu {
+    list-style-type: none;
+    display: block;
+    width: 150px;
+    padding: 0;
+    background-color: lightgrey;
+    position: relative;
+    top: -3px;
+    left: -3px;
+    border: 2px solid darkgrey;
+    border-radius: 5px;
+    min-height: 70px;
 }

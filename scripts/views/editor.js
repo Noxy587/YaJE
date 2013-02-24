@@ -11,9 +11,18 @@ var EditorView = Backbone.View.extend({
     id: "editorDrawingCanvas",
     width: 1024,
     height: 1024,
+    events: {
+        "click": "startEditing"
+    },
     render: function() {
         this.$el.attr("width", this.width);
         this.$el.attr("height", this.height);
         return this;
+    },
+    startEditing: function(event) {
+        var selectedTool = window.app.toolbar.$el.find('.selected');
+        if (selectedTool.length > 0) {
+            selectedTool.children("ul.selected").hide();
+        }
     }
 });

@@ -11,33 +11,18 @@ var Toolbar = Backbone.View.extend({
     tagName: "ul",
     //TODO: Update this to a function that selects a "default"
     currentTool: null,
-    events: {
-        "click li.tool": "selectTool"
-    },
-    loadToolbar: function(jsonSrc) {
-        this.collection.reset();
-        if (jsonSrc !== undefined && jsonSrc != null) {
-            var self = this;
-            $.getJSON(jsonSrc, function(toolbarJSON) {
-                toolbarJSON.toolset.forEach(function(toolJSON) {
-                    self.collection.add(new Tool(toolJSON));
-                });
-            });
-        }
-    },
-    selectTool: function(event) {
-        var selected = $("#"+this.id).find(".selected");
-        if (selected.length > 0) {
-            selected.removeClass('selected');
-        }
-        $(event.target).parent('li').addClass('selected');
-        this.currentTool = this.collection.findToolWithElement(event.target);
-        this.trigger('toolSelected');
+    currentMenu: null,
+    initialize: function() {
+        return this.render();
     },
     render: function() {
         var idx = 0;
         this.collection.forEach(function(tool) {
             var toolView = new ToolView({model: tool});
+            toolView.on("toolSelected", function(toolView) {
+                this.currentTool = toolView.model;
+                this.trigger('toolSelected');
+            }, this);
             var toolEle = toolView.render().$el;
             if (idx == 0) {
                 toolEle.addClass('first');
@@ -45,6 +30,7 @@ var Toolbar = Backbone.View.extend({
             if (idx >= this.collection.length -1) {
                 toolEle.addClass('last');
             }
+            toolEle.addClass('toolbarControl');
             this.$el.append(toolEle);
         }, this);
         return this;
