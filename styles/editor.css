@@ -32,6 +32,14 @@ ul.toolbar li.last {
 ul.toolbar li.selected {
     background-color: #999;
 }
+ul.toolbarMenu li.toolSetting {
+    width: 50%;
+    display: inline;
+}
+li.toolSetting input[type='number'] {
+    width: 50px;
+    margin-left: 7px;
+}
 /*Primary Toolbar Style*/
 #editorToolbar {
     width: 800px;
@@ -42,7 +50,7 @@ ul.toolbar li.selected {
 ul.toolbarMenu {
     list-style-type: none;
     display: block;
-    width: 150px;
+    width: 180px;
     padding: 0;
     background-color: lightgrey;
     position: relative;

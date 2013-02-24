@@ -17,10 +17,14 @@ var EditorView = Backbone.View.extend({
         "mousemove": "mouseMoved"
     },
     getContext: function() {
-        return this.el.getContext("2d");
+        var context = this.el.getContext("2d");
+        var currentTool = this.model.get('currentTool');
+        if (currentTool) {
+            context = currentTool.buildContext(context);
+        }
+        return context;
     },
     initialize: function() {
-        this.model.on('change:currentTool', this.toolChanged, this);
         this.render();
     },
     render: function() {
@@ -58,18 +62,6 @@ var EditorView = Backbone.View.extend({
             var coords = this.coordsFromEvent(event);
             context.lineTo(coords.x, coords.y);
             context.stroke();
-        }
-    },
-    toolChanged: function(editorModel) {
-        var tool = editorModel.get('currentTool');
-        if (tool) {
-            var context = this.getContext();
-            var toolType = tool.getToolClass();
-            if (toolType == "pencilTool") {
-                //TODO: This should come from the model, not hardcoded
-                context.strokeStyle = "#000000";
-                context.lineWidth = "3";
-            }
         }
     },
     coordsFromEvent: function(event) {

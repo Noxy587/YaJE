@@ -8,8 +8,9 @@
 var ToolView = Backbone.View.extend({
     tagName: 'li',
     className: 'tool',
+    toolbarMenu: null,
     events: {
-        "click": "selectTool"
+        "click img.toolIcon": "selectTool",
     },
     initialize: function() {
         this.template = Handlebars.compile($("#toolbarTemplate").html());
@@ -19,32 +20,41 @@ var ToolView = Backbone.View.extend({
         return this;
     },
     selectTool: function(event) {
+        this.model.defaultSettings();
         this.trigger('toolSelected', this);
         if ($(event.target).parent("li.tool").hasClass('toolbarControl')) {
-            return this.selectToolbarControl(event);
+            return this.showToolsMenu(event);
         }
         else {
-            //TODO Display tool settings
-            $("ul.toolbarMenu.selected").removeClass('selected').hide();
+            return this.showToolSettingsMenu(event);
         }
     },
     getToolClass: function() {
         return /\s+ (.+Tool)/.exec(this.className);
     },
-    selectToolbarControl: function(event) {
+    showToolsMenu: function(event) {
         var selected = $(event.target).closest("ul.toolbar").find('li.selected');
         if (selected.length > 0 && selected[0] !== $(event.target).parent('li.tool')[0]) {
             selected.removeClass('selected');
             selected.children("ul.toolbarMenu").removeClass('selected').hide();
         }
-        if ($(event.target).parent("li.tool").children("ul.toolbarMenu").length <= 0) {
-            var toolbarMenu = new ToolbarMenu({collection: this.model.get("subTools")}).render().$el;
-            $(event.target).parent("li.tool").append(toolbarMenu);
+        if (this.toolbarMenu) {
+            this.toolbarMenu.model = null;
+            this.toolbarMenu.collection = this.model.get("subTools");
+            this.toolbarMenu.render();
         }
         else {
-            toolbarMenu = $(event.target).parent("li.tool").children("ul.toolbarMenu");
+            this.toolbarMenu = new ToolbarMenu({collection: this.model.get("subTools")});
+            $(event.target).parent('li.tool').append(this.toolbarMenu.render().$el.hide());
         }
-        toolbarMenu.addClass('selected').show();
         $(event.target).parent("li.tool").addClass('selected');
+        this.toolbarMenu.$el.addClass('selected').show();
+    },
+    showToolSettingsMenu: function(event) {
+        if (this.toolbarMenu) {
+            this.toolbarMenu.collection = null;
+            this.toolbarMenu.model = this.model;
+            this.toolbarMenu.render();
+        }
     }
 });

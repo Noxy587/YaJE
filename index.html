@@ -3,10 +3,11 @@
 <head>
     <title>Editor</title>
     <!-- Start area for script sources -->
-    <script type="text/javascript" src="scripts/jquery.js"></script>
-    <script type="text/javascript" src="scripts/underscore.js"></script>
-    <script type="text/javascript" src="scripts/backbone.js"></script>
-    <script type="text/javascript" src="scripts/handlebars.js"></script>
+    <script type="text/javascript" src="scripts/libs/jquery.js"></script>
+    <script type="text/javascript" src="scripts/libs/underscore.js"></script>
+    <script type="text/javascript" src="scripts/libs/backbone.js"></script>
+    <script type="text/javascript" src="scripts/libs/handlebars.js"></script>
+    <script type="text/javascript" src="scripts/libs/jscolor/jscolor.js"></script>
     <script type="text/javascript" src="scripts/helpers/utils.js"></script>
     <script type="text/javascript" src="scripts/models/editor.js"></script>
     <script type="text/javascript" src="scripts/models/tool.js"></script>
@@ -14,6 +15,7 @@
     <script type="text/javascript" src="scripts/views/editor.js"></script>
     <script type="text/javascript" src="scripts/views/tool.js"></script>
     <script type="text/javascript" src="scripts/views/toolbar.js"></script>
+    <script type="text/javascript" src="scripts/views/toolsetting.js"></script>
     <script type="text/javascript" src="scripts/views/toolbarmenu.js"></script>
     <script type="text/javascript" src="scripts/app.js"></script>
 
@@ -23,6 +25,9 @@
 <body>
 <script id="toolbarTemplate" type="text/x-handlebars-template">
     <img src="img/{{iconImg}}" class="toolIcon {{className}}" />
+</script>
+<script id="toolSettingTemplate" type="text/x-handlebars-template">
+    {{toolSettingField settings}}
 </script>
 <script id="editorTemplate" type="text/x-handlebars-template">
     <canvas id="{{id}}" class="{{className}}" width="{{width}}" height="{{height}}">
