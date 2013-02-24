@@ -1,3 +1,12 @@
+/*App space is wrapper for application*/
+#appSpace {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 /*Default Toolbar Style*/
 ul.toolbar {
     list-style-type:none;
@@ -5,7 +14,7 @@ ul.toolbar {
     background-color: lightgrey;
     border-radius: 16px;
     border: 2px outset grey;
-    height: 30px;
+    height: 32px;
     overflow: hidden;
     padding-left: 15px;
 }
