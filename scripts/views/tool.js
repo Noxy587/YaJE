@@ -20,7 +20,6 @@ var ToolView = Backbone.View.extend({
         return this;
     },
     selectTool: function(event) {
-        this.model.defaultSettings();
         this.trigger('toolSelected', this);
         if ($(event.target).parent("li.tool").hasClass('toolbarControl')) {
             return this.showToolsMenu(event);

@@ -7,4 +7,7 @@
  */
 
 var EditorModel = Backbone.Model.extend({
+    initialize: function() {
+        this.set({"backgroundColor": "#FFFFFF"});
+    }
 });

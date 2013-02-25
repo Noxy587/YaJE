@@ -14,10 +14,13 @@ Tool = Backbone.Model.extend({
                 fields.push({title: "Size", field: "size", type: "number", value: this.get("size")});
                 fields.push({title: "Color", field: "color", type: "color", value: this.get("color")});
             }
+            else if (toolType == "eraserTool") {
+                fields.push({title: "Size", field: "size", type: "number", value: this.get("size")});
+            }
         }
         return fields;
     },
-    defaultSettings: function() {
+    initialize: function() {
         var type = this.get('className');
         var defSettings = {};
         if (type == 'pencilTool') {
@@ -28,14 +31,14 @@ Tool = Backbone.Model.extend({
                 defSettings['color'] = "#000000";
             }
         }
+        else if (type == 'eraserTool') {
+            if (this.get("size") == undefined) {
+                defSettings['size'] = 20;
+            }
+        }
         this.set(defSettings);
     },
     buildContext: function(context) {
-        var type = this.get('className');
-        if (type == 'pencilTool') {
-            context.strokeStyle=this.get('color');
-            context.lineWidth=this.get('size');
-        }
-        return context;
+
     }
 });

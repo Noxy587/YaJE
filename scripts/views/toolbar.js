@@ -32,6 +32,7 @@ var Toolbar = Backbone.View.extend({
             }
             toolEle.addClass('toolbarControl');
             this.$el.append(toolEle);
+            idx++;
         }, this);
         return this;
     }
