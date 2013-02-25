@@ -26,10 +26,17 @@ var App = Backbone.Router.extend({
     loadTools: function() {
         if (this.toolbar && this.toolbar.collection) {
             var pencilTool = new Tool({"iconImg":"pencilIcon.png", "cursorImg":"pencilCursor.png", "className": "pencilTool"});
-            var subTools = new Toolset();
-            subTools.add(new Tool(pencilTool.attributes));
-            pencilTool.set({"subTools": subTools});
             this.toolbar.collection.add(pencilTool);
+            var eraserTool = new Tool({"iconImg":"eraserIcon.png", "cursorImg":"eraserCursor.png", "className": "eraserTool"});
+            this.toolbar.collection.add(eraserTool);
+
+            var pencilSubTools = new Toolset();
+            pencilSubTools.add(pencilTool);
+            pencilTool.set({"subTools": pencilSubTools});
+
+            var eraserSubTools = new Toolset();
+            eraserSubTools.add(eraserTool);
+            eraserTool.set({"subTools": eraserSubTools});
         }
     }
 });

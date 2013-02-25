@@ -18,10 +18,12 @@ ul.toolbar {
     padding-left: 15px;
 }
 ul.toolbar li {
-    border: 0 1px 0 1px solid white;
     width:32px;
     height:32px;
     padding-left: 3px;
+    padding-right: 3px;
+    display: inline-block;
+    border-right: 2px solid darkgrey;
 }
 ul.toolbar li.first {
     border-left: 2px solid darkgrey;
@@ -31,6 +33,9 @@ ul.toolbar li.last {
 }
 ul.toolbar li.selected {
     background-color: #999;
+}
+ul.toolbarMenu li {
+    border: 0;
 }
 ul.toolbarMenu li.toolSetting {
     width: 50%;

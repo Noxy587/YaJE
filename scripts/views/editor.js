@@ -20,12 +20,23 @@ var EditorView = Backbone.View.extend({
         var context = this.el.getContext("2d");
         var currentTool = this.model.get('currentTool');
         if (currentTool) {
-            context = currentTool.buildContext(context);
+            var type = currentTool.get('className');
+            if (type == 'pencilTool') {
+                context.strokeStyle=currentTool.get('color');
+                context.lineWidth=currentTool.get('size');
+            }
+            else if (type == "eraserTool") {
+                context.strokeStyle=this.model.get('backgroundColor');
+                context.lineWidth = currentTool.get('size');
+            }
         }
         return context;
     },
     initialize: function() {
         this.render();
+        var context = this.getContext();
+        context.strokeStyle=this.model.get('backgroundColor');
+        context.fillRect(0, 0, this.width, this.height);
     },
     render: function() {
         this.$el.attr("width", this.width);
@@ -44,7 +55,7 @@ var EditorView = Backbone.View.extend({
         if (selectedTool) {
             var toolType = selectedTool.get("className");
             var context = this.getContext();
-            if(toolType == "pencilTool") {
+            if(toolType == "pencilTool" || toolType == "eraserTool") {
                 context.beginPath();
                 context.moveTo(startCoords.x, startCoords.y);
                 context.lineTo(startCoords.x, startCoords.y);
@@ -59,9 +70,15 @@ var EditorView = Backbone.View.extend({
     mouseMoved: function(event) {
         if(this.model.get("isEditing")) {
             var context = this.getContext();
-            var coords = this.coordsFromEvent(event);
-            context.lineTo(coords.x, coords.y);
-            context.stroke();
+            var selectedTool = this.model.get("currentTool");
+            if (selectedTool) {
+                var toolType = selectedTool.get("className");
+                if (toolType == "pencilTool" || toolType == "eraserTool") {
+                    var coords = this.coordsFromEvent(event);
+                    context.lineTo(coords.x, coords.y);
+                    context.stroke();
+                }
+            }
         }
     },
     coordsFromEvent: function(event) {
